@@ -1,5 +1,21 @@
 # Game
 
+## Nix
+
+J'ai ajouté un flake qui permet de démarrer un environnement de développement/de
+test assez rapidement avec [Nix](https://nixos.org/nix).
+Il suffit de faire
+```sh
+nix develop
+```
+
+## Formatage
+
+J'apprécie ne pas avoir à formatter mon code moi-même, et j'aime bien le style
+de Janestreet donc c'est celui que j'utilise avec ocamlformat.
+
+# Game - ancien readme
+
 Cette archive contient un squelette permettant de faire le projet de PFA en suivant le modèle ECS.
 
 
