@@ -16,6 +16,15 @@
         dune_2
         ocamlPackages.findlib
         ocamlformat
+
+        # GFX_SDL module's libraries
+        ocamlPackages.tsdl
+        ocamlPackages.tsdl-image
+        ocamlPackages.tsdl-ttf
+
+        # GFX_JSOO module's libraries
+        ocamlPackages.js_of_ocaml
+        ocamlPackages.js_of_ocaml-ppx
       ];
       ppfa = pkgs.ocamlPackages.buildDunePackage {
         pname = "ppfa";
