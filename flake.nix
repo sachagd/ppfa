@@ -13,7 +13,7 @@
       pkgs = import nixpkgs { system = system; };
       libs = with pkgs; [
         ocaml
-        dune_2
+        dune_3
         ocamlPackages.findlib
         ocamlformat
 
@@ -40,7 +40,7 @@
       devShells.${system}.default = pkgs.mkShell {
         packages = libs ++ [pkgs.simple-http-server];
         shellHook = ''
-            simple-http-server -i -p 2131 . &> /dev/null
+            simple-http-server -i -p 2131 . >/dev/null 2>&1 &
             echo "Static server at http://localhost:2131 !"
         '';
       };
