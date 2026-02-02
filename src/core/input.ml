@@ -25,7 +25,15 @@ let () =
   register "q" (fun () -> Global.update (fun g -> { g with camera_x = g.camera_x - 5 }));
   register "d" (fun () -> Global.update (fun g -> { g with camera_x = g.camera_x + 5 }));
   register "n" (fun () ->
-    Global.update (fun g -> { g with camera_zoom = if g.camera_zoom < 10. then g.camera_zoom +. 0.1 else g.camera_zoom}));
+    Global.update (fun g ->
+      { g with
+        camera_zoom =
+          (if g.camera_zoom < 10. then g.camera_zoom +. 0.1 else g.camera_zoom)
+      }));
   register "m" (fun () ->
-    Global.update (fun g -> { g with camera_zoom = if g.camera_zoom > 0.1 then g.camera_zoom -. 0.1 else g.camera_zoom}))
+    Global.update (fun g ->
+      { g with
+        camera_zoom =
+          (if g.camera_zoom > 0.1 then g.camera_zoom -. 0.1 else g.camera_zoom)
+      }))
 ;;

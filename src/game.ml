@@ -30,8 +30,8 @@ let update dt =
 
 let ( let@ ) f k = f k
 
-module Tileset = Wfc.Tileset(Wfc.ArrayBitmap)
-module WfcA = Wfc.Wfc(Wfc.ArrayBitmap)
+module Tileset = Wfc.Tileset (Wfc.ArrayBitmap)
+module WfcA = Wfc.Wfc (Wfc.ArrayBitmap)
 
 let run keymap =
   let window_spec =
@@ -56,28 +56,32 @@ let run keymap =
   Input.register_map keymap;
   Random.init 15;
   let rules = Hashtbl.create 16 in
-  let tiles = ['m'; 'g'; 'f'] in
-  let iterdir f =
-      List.iter f Wfc.[Up; Down; Left; Right] in
-  begin
-      iterdir (fun d -> Hashtbl.add rules (d, 'm', 'm') true);
-      iterdir (fun d -> Hashtbl.add rules (d, 'm', 'g') true);
-      iterdir (fun d -> Hashtbl.add rules (d, 'g', 'm') true);
-      iterdir (fun d -> Hashtbl.add rules (d, 'g', 'f') true);
-      iterdir (fun d -> Hashtbl.add rules (d, 'f', 'g') true);
-      iterdir (fun d -> Hashtbl.add rules (d, 'g', 'g') true);
-      iterdir (fun d-> Hashtbl.add rules (d, 'f', 'f') true);
-  end;
-  let w = WfcA.initialize 100 100 tiles (Wfc.{x = 0; y = 0}) ('m') in
+  let tiles = [ 'm'; 'g'; 'f' ] in
+  let iterdir f = List.iter f Wfc.[ Up; Down; Left; Right ] in
+  iterdir (fun d -> Hashtbl.add rules (d, 'm', 'm') true);
+  iterdir (fun d -> Hashtbl.add rules (d, 'm', 'g') true);
+  iterdir (fun d -> Hashtbl.add rules (d, 'g', 'm') true);
+  iterdir (fun d -> Hashtbl.add rules (d, 'g', 'f') true);
+  iterdir (fun d -> Hashtbl.add rules (d, 'f', 'g') true);
+  iterdir (fun d -> Hashtbl.add rules (d, 'g', 'g') true);
+  iterdir (fun d -> Hashtbl.add rules (d, 'f', 'f') true);
+  let w = WfcA.initialize 100 100 tiles Wfc.{ x = 0; y = 0 } 'm' in
   let out_bmp = Option.get (WfcA.wfc w rules) in
-  Wfc.ArrayBitmap.fold 
-    (fun {x; y} c () ->
-                Block.create
-                ((x) * 10, (y) * 10, 10, 10, match c with
-                | 'm' -> Texture.black
-                | 'g' -> Texture.green
-                | 'f' -> Texture.red
-                | _ -> Texture.white) |> ignore) () out_bmp;
+  Wfc.ArrayBitmap.fold
+    (fun { x; y } c () ->
+       Block.create
+         ( x * 10
+         , y * 10
+         , 10
+         , 10
+         , match c with
+           | 'm' -> Texture.black
+           | 'g' -> Texture.green
+           | 'f' -> Texture.red
+           | _ -> Texture.white )
+       |> ignore)
+    ()
+    out_bmp;
   let@ () = Gfx.main_loop ~limit:false init in
   let@ () = Gfx.main_loop update in
   ()
