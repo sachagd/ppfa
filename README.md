@@ -1,5 +1,13 @@
 # Game
 
+## Wave Function Collapse
+
+On utilise l'algorithme [Wave Function Collapse](https://github.com/mxgmn/WaveFunctionCollapse) pour faire de la génération procédurale de terrain.
+
+D'autres références :
+- [Hierarchical Wave Function Collapse](https://dl.acm.org/doi/pdf/10.1145/3582437.3587209?download=true)
+- [Extend Wave Function Collapse Algorithm to Large-Scale Content Generation](https://arxiv.org/pdf/2308.07307)
+
 ## Nix
 
 J'ai ajouté un flake qui permet de démarrer un environnement de développement/de
